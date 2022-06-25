@@ -1,5 +1,4 @@
 import { useEffect, createContext, useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import api from '../api'
 
 
@@ -8,15 +7,13 @@ export const useAppContext = () => useContext(Context)
 
 export default function AppContextProvider({ children }) {
   const [isInitialized, setIsInitialized] = useState(false)
-//   const navigate = useNavigate()
-//   const navigateToLogin = () => navigate('/login', { replace: true})
 
   useEffect(() => {
     if (sessionStorage.token) {
         api.setup(sessionStorage.token)
         setIsInitialized(true)
     } else {
-        // navigateToLogin()
+       
     }
   }, [])
 

@@ -12,26 +12,26 @@ import AddField from "../components/AddField";
 import DanceList from "../components/DanceList";
 import api from "../api";
 
-const PAGE_SIZE = 4
+const PAGE_SIZE = 2
 
 export default function HomePage( id, onChange) {
   
-    const { data: dances = [] } = useDancesGet()
+    const { data: dances = [], setDance } = useDancesGet()
   
-    const { cart } = useAppContext()
+    const { cart  } = useAppContext()
 
     const [expanded, setExpanded] = useState(false);
 
-    const handleExpandClick = () => {
-      setExpanded(!expanded);
+    const handleExpandClick = () => { setExpanded(!expanded);
     }; 
     const [search, setSearch] = useState('')
-  const [sort, setSort] = useState('change')
-    const [dancess, setDances] = useState([])
+    const [sort, setSort] = useState('change')
     const [page, setPage] = useState(1)
+
+
     const loadDances = (description, currentSort, currentPage) => {
       api
-        .get(`/todos`, {
+        .get(`/dances`, {
           params: {
             description,
             sort: currentSort,
@@ -39,7 +39,7 @@ export default function HomePage( id, onChange) {
             pageSize: PAGE_SIZE,
           },
         })
-        .then(({ data }) => setDances(data))
+        .then(({ data }) => setDance(data))
     }
   
     useEffect(() => {
@@ -108,8 +108,9 @@ return(
                 {dance.startTime}
               </Typography>
               <Typography >
-                <ChangeField />
-                <DanceList {...{dancess, loadDances}} />
+                <ChangeField
+                />
+                {/* <DanceList {...{cart, loadDances}} /> */}
               </Typography>
             </CardContent>
           </Card>
@@ -120,11 +121,11 @@ return(
         <Stack direction="row" spacing={1}>
           {[1, 2, 3 ].map((p) => (
             <Button
-              key={p}
+              key={page}
               variant={p === page ? 'contained' : 'outlined'}
               onClick={() => setPage(p)}
             >
-              {p}
+              {page}
             </Button>
           ))}
         </Stack>
