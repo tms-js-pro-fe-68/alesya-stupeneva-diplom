@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { useQuery } from 'react-query'
-import { useAppContext} from '../components/Page' 
+import { useAppContext} from '../components/AppContext' 
 import api from '../api'
 
 export function useDancesGet(options) {
@@ -9,7 +9,7 @@ export function useDancesGet(options) {
     return useQuery(
       ['/dances'],
       async () => {
-        const result = await api.get(`/dances`)
+        const result = await api.get(`/dance-exercises`)
         return result.data
       },
       {

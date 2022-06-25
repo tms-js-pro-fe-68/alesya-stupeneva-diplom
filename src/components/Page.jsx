@@ -3,7 +3,7 @@ import { createContext, useContext } from 'react';
 
 
 const Context = createContext()
-export const useAppContext = () => useContext(Context)
+export const usePageContext = () => useContext(Context)
 
 export default function Page({ sx, ...otherProps }) {
     return(

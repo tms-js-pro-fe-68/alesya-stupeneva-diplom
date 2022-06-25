@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://tms-js-pro-back-end.herokuapp.com/api/dance-exercises',
+  baseURL: 'https://tms-js-pro-back-end.herokuapp.com/api',
 })
 
 api.setup = key => {

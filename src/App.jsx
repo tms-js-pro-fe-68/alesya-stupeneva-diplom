@@ -24,7 +24,7 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <Router>
           <Routes>
-            <Route path="/login" element={<LoginPage/>} />
+            <Route path="/" element={<LoginPage/>} exact/>
             <Route path="/dances" element={<HomePage/>} />
           </Routes>
         </Router>
