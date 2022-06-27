@@ -5,20 +5,23 @@ import { Box, Button, Card, CardActions, CardContent, CardMedia, Chip, Collapse,
 import { useDancesGet } from '../query/dances'
 import { useAppContext } from "../components/AppContext";
 import { useEffect, useState } from "react";
-import { Expand as ExpandMore, Delete as DeleteIcon, Add as AddIcon } from "@mui/icons-material";
-// import ConfirmDialog from "../components/ConfirmDialog";
-import ChangeField from "../components/ChangeField";
-import AddField from "../components/AddField";
+import { Expand as ExpandMore } from "@mui/icons-material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DanceList from "../components/DanceList";
 import api from "../api";
+import AddDanceItemButton from "../components/AddDanceItemButton";
+
+
 
 const PAGE_SIZE = 2
 
-export default function HomePage( id, onChange) {
+
+
+export default function HomePage( ) {
   
     const { data: dances = [], setDance } = useDancesGet()
   
-    const { cart  } = useAppContext()
+    const { cart, setCart  } = useAppContext()
 
     const [expanded, setExpanded] = useState(false);
 
@@ -29,11 +32,12 @@ export default function HomePage( id, onChange) {
     const [page, setPage] = useState(1)
 
 
-    const loadDances = (description, currentSort, currentPage) => {
+    const loadDances = (description,title, currentSort, currentPage) => {
       api
         .get(`/dances`, {
           params: {
             description,
+            title,
             sort: currentSort,
             page: currentPage,
             pageSize: PAGE_SIZE,
@@ -53,7 +57,7 @@ return(
       <TextField value={search} onChange={(e) => setSearch(e.target.value)} />
       <Button
         onClick={() =>
-          setSort((prevSort) => (prevSort === 'change' ? 'desc' : 'change'))
+          setSort((prevSort) => (prevSort === 'sort' ? 'change' : 'sort'))
         }
       >
         {sort}
@@ -76,7 +80,6 @@ return(
         {dances.map(dance => (
           <Card key={dance.id} sx={{ maxWidth: 345, p: 3, m:3 }}>
             <CardMedia
-            a={console.log(dance)}
               component="img"
               height="194"
               image={dance.imageUrl}
@@ -95,7 +98,9 @@ return(
                   aria-expanded={expanded}
                   aria-label="show more"
                 >
+                <ExpandMoreIcon />
                 </ExpandMore>
+                
               </CardActions>
               <Collapse in={expanded} timeout="auto" unmountOnExit>
                 <CardContent>
@@ -108,22 +113,25 @@ return(
                 {dance.startTime}
               </Typography>
               <Typography >
-                <ChangeField
-                />
-                {/* <DanceList {...{cart, loadDances}} /> */}
+                <AddDanceItemButton onAfterSubmit={loadDances} />
               </Typography>
             </CardContent>
+            <Typography>
+            <DanceList {...{dances, loadDances}} />
+        </Typography>
           </Card>
+        
         ))}
+        
       </Box>
-      <AddField />
+    
       <Stack direction="row" sx={{ justifyContent: 'center', width: 1, p: 3 }}>
         <Stack direction="row" spacing={1}>
-          {[1, 2, 3 ].map((p) => (
+          {[1, 2, 3 ].map((page) => (
             <Button
               key={page}
-              variant={p === page ? 'contained' : 'outlined'}
-              onClick={() => setPage(p)}
+              variant={page === page ? 'contained' : 'outlined'}
+              onClick={() => setPage(page)}
             >
               {page}
             </Button>

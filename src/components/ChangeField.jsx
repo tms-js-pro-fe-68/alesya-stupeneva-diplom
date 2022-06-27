@@ -37,18 +37,18 @@ export default function ChangeField({ id, onChange, done }) {
     onChange()
   }
   
-    const handleDelete = async () => {
-      await fetch(`https://tms-js-pro-back-end.herokuapp.com/api/dance-exercises/${id}`, {
-        method: 'DELETE',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: `Token ${sessionStorage.token}`,
-        },
-      })
-  
-      onChange()
-    }
+  const handleDelete = async () => {
+    await fetch(`https://tms-js-pro-back-end.herokuapp.com/api/dance-exercises/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Token ${sessionStorage.token}`,
+      },
+    })
+
+    onChange()
+  }
   
     const [isDeleteOpen, setIsDeleteOpen] = useState(false)
     const handleDeleteOpen = () => setIsDeleteOpen(true)

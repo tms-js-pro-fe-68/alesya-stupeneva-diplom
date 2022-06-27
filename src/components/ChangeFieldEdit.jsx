@@ -30,6 +30,7 @@ import { useEffect, useState } from 'react'
   
     const modifyDance = async () => {
       const changeId = id ? `/${id}` : ''
+      console.log(id)
       await fetch(
         `https://tms-js-pro-back-end.herokuapp.com/api/dance-exercises${changeId}`,
         {
@@ -57,7 +58,7 @@ import { useEffect, useState } from 'react'
         </DialogContent>
         <DialogActions>
           <Button onClick={onClose}>Cancel</Button>
-          <Button onClick={modifyDance} autoFocus variant="contained">
+          <Button onClick={modifyDance} autoFocus variant="contained" id={id}>
             {id ? 'Edit' : 'Add'}
           </Button>
         </DialogActions>

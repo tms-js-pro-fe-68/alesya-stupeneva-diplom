@@ -13,7 +13,7 @@ const handleCloseMenu = () => setAnchorEl(null)
 const handleLogOut = () => {
 sessionStorage.token = '';
 sessionStorage.email = '';
-navigate('/login', { replace: true});
+navigate('/', { replace: true});
 handleCloseMenu()
 }
 
