@@ -19,19 +19,3 @@ export function useDancesGet(options) {
     )
   }
 
-
-// export function useDanceGet(options) {
-//   const {isInitialized} = useAppContext ()
-
-//   return useQuery(
-//     ['/dance'],
-//     async () => {
-//       const result = await api.get(`/dance/${options.id}`)
-//       return result.data
-//     },
-//     {
-//       ...options,
-//       enabled: isInitialized,
-//     },
-//   )
-// }

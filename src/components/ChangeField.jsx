@@ -38,15 +38,17 @@ export default function ChangeField({ id, onChange, done }) {
   }
   
   const handleDelete = async () => {
+    console.log(id),
     await fetch(`https://tms-js-pro-back-end.herokuapp.com/api/dance-exercises/${id}`, {
+      
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
         Authorization: `Token ${sessionStorage.token}`,
       },
+      
     })
-
     onChange()
   }
   
