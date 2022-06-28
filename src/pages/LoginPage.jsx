@@ -3,7 +3,7 @@ import { useFormik} from 'formik'
 import { object, string} from 'yup'
 import {TextField, Button, Paper, Box, Typography} from '@mui/material'
 import Page from '../components/Page'
-// import login from '../pictures/login.jpg'
+
 
 const signInSchema = object().shape({
   email: string().required(),
@@ -32,7 +32,7 @@ const navigate = useNavigate();
     
     sessionStorage.token = data.token;
     sessionStorage.email = data.email;
-    navigate('/', {replace: true });
+    navigate('/dances', {replace: true });
     setSubmitting(false);
   };
   
@@ -46,7 +46,7 @@ const navigate = useNavigate();
   validateOnMount: true,
 });
 
-console.log(formik);
+// console.log(formik);
 
   return (
   <Page className='justify-center items-center'>
