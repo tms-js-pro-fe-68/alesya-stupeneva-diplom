@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DanceList from "../components/DanceList";
 import api from "../api";
 import AddDanceItemButton from "../components/AddDanceItemButton";
+import ChangeField from "../components/ChangeField";
 
 
 
@@ -19,22 +20,22 @@ export default function HomePage( ) {
   
     const { cart, setCart  } = useAppContext()
 
-    const [expanded, setExpanded] = useState(false);
+    // const [expanded, setExpanded] = useState(false);
 
-    const handleExpandClick = () => { setExpanded(!expanded);
-    }; 
+    // const handleExpandClick = () => { setExpanded(!expanded);
+    // }; 
     
 
     const loadDances = (description,title ) => {
       api
-        .get(`/dances`, {
+        .get(`/dance-exercises`, {
           params: {
             description,
             title,
            
           },
         })
-        .then(({ data }) => setDance(data))
+        // .then(({ data }) => setDance(data))
     }
   
     useEffect(() => {
@@ -61,54 +62,7 @@ return(
           color: 'white',
         }}
       >
-        <DanceList   {...{dances, loadDances}}  >
-        
-        {dances.map(dance => (
-          <Card key={dance.id} sx={{ maxWidth: 345, p: 3, m:3 }}>
-            <CardMedia
-              component="img"
-              height="194"
-              image={dance.imageUrl}
-              alt="dance"
-            />
-            <CardContent>
-              <Stack direction="row" justifyContent="space-between">
-                <Typography variant="subtitle1" color="text.secondary">
-                  {dance.title}
-                </Typography>
-              </Stack>
-              <CardActions disableSpacing>
-                <ExpandMore
-                  expand={expanded}
-                  onClick={handleExpandClick}
-                  aria-expanded={expanded}
-                  aria-label="show more"
-                >
-                <ExpandMoreIcon />
-                </ExpandMore>
-                
-              </CardActions>
-              <Collapse in={expanded} timeout="auto" unmountOnExit>
-                <CardContent>
-                  <Typography paragraph>
-                  {dance.description}
-                  </Typography>
-                </CardContent>
-              </Collapse>
-              <Typography variant="body2" color="text.secondary">
-                {dance.startTime}
-              </Typography>
-              <Typography >
-                <AddDanceItemButton onAfterSubmit={loadDances} />
-              </Typography>
-            </CardContent>
-            <Typography>
-            <DanceList {...{dances, loadDances}} />
-             </Typography>
-          </Card>
-        
-        ))}
-        </DanceList>
+        <DanceList {...{dances, loadDances}}  />
         
       </Box>
 
