@@ -11,9 +11,7 @@ import AppContextProvider from './components/AppContext';
 
 const queryClient = new QueryClient({
   defaultOptions: {
-    // queries: {
-    //   staleTime: Infinity,
-    // },
+    
   },
 })
 export default function App() {
@@ -25,7 +23,7 @@ export default function App() {
         <Router>
           <Routes>
             <Route path="/" element={<LoginPage/>} exact/>
-            <Route path="/dances" element={<HomePage/>} />
+            <Route path="/dance-exercises" element={<HomePage/>} />
           </Routes>
         </Router>
       </QueryClientProvider>

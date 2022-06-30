@@ -7,7 +7,7 @@ export function useDancesGet(options) {
     const {isInitialized} = useAppContext ()
   
     return useQuery(
-      ['/dances'],
+      ['/dance-exercises'],
       async () => {
         const result = await api.get(`/dance-exercises`)
         return result.data

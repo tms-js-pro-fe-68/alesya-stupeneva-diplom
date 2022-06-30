@@ -32,7 +32,7 @@ const navigate = useNavigate();
     
     sessionStorage.token = data.token;
     sessionStorage.email = data.email;
-    navigate('/dances', {replace: true });
+    navigate('/dance-exercises', {replace: true });
     setSubmitting(false);
   };
   
